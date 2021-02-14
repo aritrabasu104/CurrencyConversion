@@ -13,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.tnf.usecase.error.custom.CurrencyServiceCommunicationException;
+import com.tnf.usecase.error.custom.IncompleteConversionMapException;
 import com.tnf.usecase.error.custom.InvalidConversionRateException;
 import com.tnf.usecase.model.Product;
 import com.tnf.usecase.model.Product.Currency;
@@ -48,7 +49,9 @@ public class UserServiceImpl implements UserService {
 							CONVERSION_SCALE, RoundingMode.HALF_DOWN);
 				} catch (ArithmeticException e) {
 					throw new InvalidConversionRateException(item.getCurrency().toString());
-				}
+				}catch (NullPointerException e) {
+					throw new IncompleteConversionMapException(item.getCurrency().toString());
+				} 
 				BigDecimal finalPrice = priceInEuro.multiply(BigDecimal.valueOf(rates.get(currency.toString())));
 				item.setPrice(finalPrice);
 				item.setCurrency(currency);

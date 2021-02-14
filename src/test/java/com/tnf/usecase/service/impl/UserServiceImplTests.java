@@ -1,6 +1,7 @@
 package com.tnf.usecase.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -27,10 +28,15 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import com.tnf.usecase.dto.CurrencyRateResponseDto;
+import com.tnf.usecase.error.custom.CurrencyServiceCommunicationException;
+import com.tnf.usecase.error.custom.IncompleteConversionMapException;
+import com.tnf.usecase.error.custom.InvalidConversionRateException;
 import com.tnf.usecase.model.Product;
 import com.tnf.usecase.model.Product.Currency;
 import com.tnf.usecase.repository.ProductRepository;
 import com.tnf.usecase.service.CurrencyService;
+
+import feign.FeignException;
 
 @SpringBootTest
 public class UserServiceImplTests {
@@ -57,7 +63,8 @@ public class UserServiceImplTests {
 	private List<Product> products;
 	private Page<Product> productsPage;
 	private CurrencyRateResponseDto currencyRateResponseDto = new CurrencyRateResponseDto();
-
+	private Map<String, Double> rates;
+	
 	@BeforeEach
 	public void init() {
 		products = new ArrayList<>();
@@ -72,7 +79,7 @@ public class UserServiceImplTests {
 
 		productsPage = new PageImpl<>(products, PageRequest.of(0, 2), 2);
 
-		Map<String, Double> rates = new HashMap<>();
+		rates = new HashMap<>();
 		rates.put(Currency.INR.toString(), 80d);
 		rates.put(Currency.EUR.toString(), 1d);
 		currencyRateResponseDto.setRates(rates);
@@ -82,7 +89,7 @@ public class UserServiceImplTests {
 	}
 
 	@Test
-	public void shouldReturnProuducts() {
+	public void shouldReturnProuductsWithConvertedPrice() {
 		
 		PageRequest pageRequest = PageRequest.of(0, 5);
 		when(productRepository.findAll(pageRequest)).thenReturn(productsPage);
@@ -116,6 +123,49 @@ public class UserServiceImplTests {
 		assertEquals(pageRequest, acPageRequest.getValue());
 		verify(currencyService,times(1)).getCurrencyRates(acUri.capture());
 		assertEquals(URI.create(CONVERSION_URI), acUri.getValue());
+
+	}
+	
+	@Test
+	public void shouldThrowCurrencyServiceCommunicationException() {
+		
+		PageRequest pageRequest = PageRequest.of(0, 5);
+		when(productRepository.findAll(pageRequest)).thenReturn(productsPage);
+		when(currencyService.getCurrencyRates(URI.create(CONVERSION_URI))).thenThrow(FeignException.class);
+		
+		assertThrows(CurrencyServiceCommunicationException.class, () -> userServiceImpl.getProducts(Currency.INR, pageRequest));	
+
+	}
+	
+	@Test
+	public void shouldThrowInvalidConversionRateException() {
+		
+		PageRequest pageRequest = PageRequest.of(0, 5);
+		when(productRepository.findAll(pageRequest)).thenReturn(productsPage);
+		
+		rates = new HashMap<>();
+		rates.put(Currency.INR.toString(), 0d);
+		rates.put(Currency.EUR.toString(), 0d);
+		currencyRateResponseDto.setRates(rates);
+		when(currencyService.getCurrencyRates(URI.create(CONVERSION_URI))).thenReturn(currencyRateResponseDto);
+		
+		assertThrows(InvalidConversionRateException.class, () -> userServiceImpl.getProducts(Currency.INR, pageRequest));	
+
+	}
+	
+
+	@Test
+	public void shouldThrowIncompleteConversionMapException() {
+		
+		PageRequest pageRequest = PageRequest.of(0, 5);
+		when(productRepository.findAll(pageRequest)).thenReturn(productsPage);
+		
+		rates = new HashMap<>();
+		rates.put(Currency.INR.toString(), 0d);
+		currencyRateResponseDto.setRates(rates);
+		when(currencyService.getCurrencyRates(URI.create(CONVERSION_URI))).thenReturn(currencyRateResponseDto);
+		
+		assertThrows(IncompleteConversionMapException.class, () -> userServiceImpl.getProducts(Currency.INR, pageRequest));	
 
 	}
 }
