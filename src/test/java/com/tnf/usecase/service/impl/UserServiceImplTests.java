@@ -134,7 +134,7 @@ public class UserServiceImplTests {
 		when(currencyService.getCurrencyRates(URI.create(CONVERSION_URI))).thenThrow(FeignException.class);
 		
 		assertThrows(CurrencyServiceCommunicationException.class, () -> userServiceImpl.getProducts(Currency.INR, pageRequest));	
-
+		verify(productRepository,times(0)).findAll(acPageRequest.capture());
 	}
 	
 	@Test
@@ -150,7 +150,9 @@ public class UserServiceImplTests {
 		when(currencyService.getCurrencyRates(URI.create(CONVERSION_URI))).thenReturn(currencyRateResponseDto);
 		
 		assertThrows(InvalidConversionRateException.class, () -> userServiceImpl.getProducts(Currency.INR, pageRequest));	
-
+		verify(productRepository,times(1)).findAll(acPageRequest.capture());
+		assertEquals(pageRequest, acPageRequest.getValue());
+		
 	}
 	
 
@@ -166,6 +168,8 @@ public class UserServiceImplTests {
 		when(currencyService.getCurrencyRates(URI.create(CONVERSION_URI))).thenReturn(currencyRateResponseDto);
 		
 		assertThrows(IncompleteConversionMapException.class, () -> userServiceImpl.getProducts(Currency.INR, pageRequest));	
-
+		verify(productRepository,times(1)).findAll(acPageRequest.capture());
+		assertEquals(pageRequest, acPageRequest.getValue());
+		
 	}
 }

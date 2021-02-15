@@ -1,0 +1,18 @@
+logging:
+  level: 
+    root: info
+    org: 
+      hibernate:
+        SQL: DEBUG
+        type: 
+          descriptor: 
+            sql: 
+              BasicBinder: TRACE
+conversion:
+  api:
+    uri: http://data.fixer.io/api/latest?access_key=c1efd5c03b44069a290e99b6e1cf9abe
+  scale: 10
+eureka:
+  client:
+    enabled: false
+              

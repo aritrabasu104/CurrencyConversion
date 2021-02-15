@@ -1,0 +1,47 @@
+2021-02-15 11:34:00,816 INFO o.h.v.i.u.Version [background-preinit] HV000001: Hibernate Validator 6.1.7.Final
+2021-02-15 11:34:00,878 INFO o.s.b.StartupInfoLogger [restartedMain] Starting ProductAppApplication using Java 11.0.10 on DESKTOP-90MK3Q5 with PID 19952 (C:\Users\aritr\Documents\ws_new\ProductApp\target\classes started by aritr in C:\Users\aritr\Documents\ws_new\ProductApp)
+2021-02-15 11:34:00,884 INFO o.s.b.SpringApplication [restartedMain] No active profile set, falling back to default profiles: default
+2021-02-15 11:34:00,976 INFO o.s.b.l.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-02-15 11:34:00,978 INFO o.s.b.l.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-02-15 11:34:02,308 INFO o.s.d.r.c.RepositoryConfigurationDelegate [restartedMain] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-02-15 11:34:02,376 INFO o.s.d.r.c.RepositoryConfigurationDelegate [restartedMain] Finished Spring Data repository scanning in 58 ms. Found 1 JPA repository interfaces.
+2021-02-15 11:34:02,642 INFO o.s.c.c.s.GenericScope [restartedMain] BeanFactory id=2aa5439b-d0b6-34f2-b338-151ce8b58279
+2021-02-15 11:34:02,691 INFO o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker [restartedMain] Bean 'com.tnf.usecase.service.CurrencyService' of type [org.springframework.cloud.openfeign.FeignClientFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-02-15 11:34:03,488 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat initialized with port(s): 8080 (http)
+2021-02-15 11:34:03,502 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2021-02-15 11:34:03,503 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2021-02-15 11:34:03,503 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/9.0.41]
+2021-02-15 11:34:03,638 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2021-02-15 11:34:03,638 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 2658 ms
+2021-02-15 11:34:03,696 INFO c.z.h.HikariDataSource [restartedMain] HikariPool-1 - Starting...
+2021-02-15 11:34:03,820 INFO c.z.h.HikariDataSource [restartedMain] HikariPool-1 - Start completed.
+2021-02-15 11:34:03,828 INFO o.s.b.a.h.H2ConsoleAutoConfiguration [restartedMain] H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:aa058e9c-d6c6-4b36-9e7e-81db7b05dd0b'
+2021-02-15 11:34:03,982 INFO o.h.j.i.u.LogHelper [restartedMain] HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-02-15 11:34:04,035 INFO o.h.Version [restartedMain] HHH000412: Hibernate ORM core version 5.4.27.Final
+2021-02-15 11:34:04,170 INFO o.h.a.c.r.j.JavaReflectionManager [restartedMain] HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-02-15 11:34:04,298 INFO o.h.d.Dialect [restartedMain] HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2021-02-15 11:34:05,006 DEBUG o.h.e.j.s.SqlStatementLogger [restartedMain] drop table if exists product CASCADE 
+2021-02-15 11:34:05,011 DEBUG o.h.e.j.s.SqlStatementLogger [restartedMain] create table product (id binary not null, currency integer, description varchar(255), name varchar(255), price decimal(19,2), primary key (id))
+2021-02-15 11:34:05,024 INFO o.h.e.t.j.p.i.JtaPlatformInitiator [restartedMain] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-02-15 11:34:05,034 INFO o.s.o.j.AbstractEntityManagerFactoryBean [restartedMain] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-02-15 11:34:05,087 INFO o.s.b.d.a.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2021-02-15 11:34:05,739 WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [restartedMain] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-02-15 11:34:05,923 INFO o.s.s.c.ExecutorConfigurationSupport [restartedMain] Initializing ExecutorService 'applicationTaskExecutor'
+2021-02-15 11:34:08,453 INFO o.s.c.c.u.InetUtils [restartedMain] Cannot determine local hostname
+2021-02-15 11:34:08,597 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
+2021-02-15 11:34:08,627 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat started on port(s): 8080 (http) with context path ''
+2021-02-15 11:34:10,139 INFO o.s.c.c.u.InetUtils [restartedMain] Cannot determine local hostname
+2021-02-15 11:34:10,172 INFO o.s.b.StartupInfoLogger [restartedMain] Started ProductAppApplication in 11.573 seconds (JVM running for 13.284)
+2021-02-15 11:34:14,710 INFO o.a.j.l.DirectJDKLog [http-nio-8080-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-02-15 11:34:14,711 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
+2021-02-15 11:34:14,714 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Completed initialization in 3 ms
+2021-02-15 11:34:14,939 INFO c.t.u.a.LoggingAspect [http-nio-8080-exec-1] before execution: class: com.tnf.usecase.controller.AdminController ,method : register, args : ,ProductRequestDto(name=string, description=string, price=290, currency=INR)
+2021-02-15 11:34:14,999 INFO c.t.u.a.LoggingAspect [http-nio-8080-exec-1] before execution: class: com.tnf.usecase.service.impl.AdminServiceImpl ,method : addProduct, args : ,Product(id=null, name=string, description=string, price=290, currency=INR)
+2021-02-15 11:34:15,092 DEBUG o.h.e.j.s.SqlStatementLogger [http-nio-8080-exec-1] insert into product (currency, description, name, price, id) values (?, ?, ?, ?, ?)
+2021-02-15 11:34:15,101 TRACE o.h.t.d.s.BasicBinder [http-nio-8080-exec-1] binding parameter [1] as [INTEGER] - [66]
+2021-02-15 11:34:15,104 TRACE o.h.t.d.s.BasicBinder [http-nio-8080-exec-1] binding parameter [2] as [VARCHAR] - [string]
+2021-02-15 11:34:15,105 TRACE o.h.t.d.s.BasicBinder [http-nio-8080-exec-1] binding parameter [3] as [VARCHAR] - [string]
+2021-02-15 11:34:15,107 TRACE o.h.t.d.s.BasicBinder [http-nio-8080-exec-1] binding parameter [4] as [NUMERIC] - [290]
+2021-02-15 11:34:15,109 TRACE o.h.t.d.s.BasicBinder [http-nio-8080-exec-1] binding parameter [5] as [BINARY] - [9851f530-e84b-494e-9d2e-2863204a7063]
+2021-02-15 11:34:15,121 INFO c.t.u.a.LoggingAspect [http-nio-8080-exec-1] after execution: return value: Product(id=9851f530-e84b-494e-9d2e-2863204a7063, name=string, description=string, price=290, currency=INR)
+2021-02-15 11:34:15,125 INFO c.t.u.a.LoggingAspect [http-nio-8080-exec-1] after execution: return value: <200 OK OK,Product(id=9851f530-e84b-494e-9d2e-2863204a7063, name=string, description=string, price=290, currency=INR),[]>
