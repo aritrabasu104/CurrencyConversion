@@ -2,6 +2,7 @@ package com.tnf.usecase.service;
 
 import java.net.URI;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -11,5 +12,6 @@ import com.tnf.usecase.dto.CurrencyRateResponseDto;
 public interface CurrencyService {
 
 	@GetMapping("")
-    public CurrencyRateResponseDto getCurrencyRates(URI baseUri);
+	@Cacheable(value = "rates",keyGenerator = "rateKeyGenerator")
+	public CurrencyRateResponseDto getCurrencyRates(URI baseUri);
 }
